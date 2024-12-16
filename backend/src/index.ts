@@ -21,6 +21,10 @@ app.get("/hello", (req, res) => {
   res.send("Hello World!");
 })
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "healthy" });
+})
+
 app.use("/api/auth", userRouter);
 // Errors handler
 app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
