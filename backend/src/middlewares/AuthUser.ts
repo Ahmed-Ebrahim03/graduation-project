@@ -7,11 +7,6 @@ import asyncHandler from "express-async-handler";
 
 export const authUser: RequestHandler = asyncHandler(async (req: Request & { user?: IUser }, res: Response, next: NextFunction) => {
     const token = req.headers.authorization || req.headers.token;
-    // if (!authHeader?.startsWith("Bearer")) {
-    //     res.status(401);
-    //     throw new Error("Not authorized, no token");
-    // }
-    console.log(token);
 
     if (!token || typeof token !== 'string') {
         res.status(401);
