@@ -5,6 +5,8 @@ import env from "./config/env";
 import morgan from "morgan";
 import cors from "cors";
 import userRouter from "./routes/userRouter";
+import summaryRouter from "./routes/summaryRouter";
+import questionsRouter from "./routes/questionsRouter";
 
 const app = express();
 app.use(morgan("dev"));
@@ -26,6 +28,8 @@ app.get("/health", (req, res) => {
 })
 
 app.use("/api/auth", userRouter);
+app.use("/api/summarize", summaryRouter)
+app.use("/api/questions", questionsRouter)
 // Errors handler
 app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   const statusCode = res.statusCode ? res.statusCode : 500;
