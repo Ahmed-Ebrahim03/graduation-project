@@ -25,17 +25,23 @@ const quesitonsControllers: QuestionsControllers = {
             throw new Error('Invalid request body');
         }
 
-        const text = await Summary.findById(summaryId);
+        const summary = await Summary.findById(summaryId);
+        if (!summary) {
+            res.status(404);
+            throw new Error('Summary not found');
+        }
         const url = env.AI_SERVICE_URL + '/questions';
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ text, number })
+            body: JSON.stringify({ text: summary.summary, number })
         });
         const questions = await response.json();
         await Summary.findByIdAndUpdate(summaryId, { questions });
+
+        console.log(questions);
         
         res.status(200).json({
             questions

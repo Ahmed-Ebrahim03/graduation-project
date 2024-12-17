@@ -11,6 +11,7 @@ export const authUser: RequestHandler = asyncHandler(async (req: Request & { use
     //     res.status(401);
     //     throw new Error("Not authorized, no token");
     // }
+    console.log(token);
 
     if (!token || typeof token !== 'string') {
         res.status(401);

@@ -4,10 +4,12 @@ import userService from '../services/userService'
 import zod from 'zod'
 import jwt from 'jsonwebtoken'
 import env from '../config/env'
+import { IUser } from '../models/user'
 
 type UserController = {
     signUp: (req: Request, res: Response, next: NextFunction) => void
     logIn: (req: Request, res: Response, next: NextFunction) => void
+    authUser: (req: Request, res: Response, next: NextFunction) => void
 }
 
 const userSchema = zod.object({
@@ -56,6 +58,12 @@ const userController: UserController = {
             message: 'logIn',
             user: user,
             token: token
+        })
+    }),
+    authUser: asyncHandler(async (req: Request & {user?: IUser}, res: Response, next: NextFunction) => {
+        res.status(200).json({
+            message: 'authUser',
+            user: req.user
         })
     })
 }

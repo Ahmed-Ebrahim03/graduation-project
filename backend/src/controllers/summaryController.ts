@@ -59,15 +59,16 @@ const summaryController: SummaryController = {
     ],
 
     getSummary: asyncHandler(async (req: Request & { user?: IUser }, res: Response, next: NextFunction) => {
-        const summary = await Summary.find({ userId: req.user!._id });
+        const summary = await Summary.findById(req.params.id);
         res.status(200).json({
             summary: summary
         });
     }),
 
     getAllSummaries: asyncHandler(async (req: Request & { user?: IUser }, res: Response, next: NextFunction) => {
-        const summarizes = await Summary.find({ userId: req.user!._id }).select("_id title");
+        const summarizes = await Summary.find({ userId: req.user!._id });
         // [{ _id, title }]
+        console.log(summarizes);
         res.status(200).json({
             summarizes: summarizes
         });
