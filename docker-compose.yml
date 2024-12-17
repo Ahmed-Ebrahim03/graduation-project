@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ai
+      - mongodb
+    networks:
+      - my-network
+
+  ai: 
+    build: ./ai
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+
+  mongodb:
+    image: mongo:noble
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+    volumes:
+      - mongodb-data:/data/db
+
+networks:
+  my-network:
+
+volumes:
+  mongodb-data:
