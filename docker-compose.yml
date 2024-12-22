@@ -10,6 +10,15 @@ services:
     networks:
       - my-network
 
+  web:
+    build: ./web
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - my-network
+
   ai: 
     build: ./ai
     ports:

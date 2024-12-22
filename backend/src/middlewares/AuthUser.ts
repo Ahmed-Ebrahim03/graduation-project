@@ -13,6 +13,8 @@ export const authUser: RequestHandler = asyncHandler(async (req: Request & { use
         throw new Error("Not authorized, no token");
     }
 
+    console.log(token)
+
     try {
         // const token = authHeader.split(" ")[1];
         const decoded = jwt.verify(token, env.JWT_SECRET) as jwt.JwtPayload;

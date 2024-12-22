@@ -68,7 +68,7 @@ const summaryController: SummaryController = {
     getAllSummaries: asyncHandler(async (req: Request & { user?: IUser }, res: Response, next: NextFunction) => {
         const summarizes = await Summary.find({ userId: req.user!._id });
         // [{ _id, title }]
-        console.log(summarizes);
+        // console.log(summarizes);
         res.status(200).json({
             summarizes: summarizes
         });

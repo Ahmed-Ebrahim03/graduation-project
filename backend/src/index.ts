@@ -7,6 +7,7 @@ import cors from "cors";
 import userRouter from "./routes/userRouter";
 import summaryRouter from "./routes/summaryRouter";
 import questionsRouter from "./routes/questionsRouter";
+// import ngrok from "@ngrok/ngrok";
 
 const app = express();
 app.use(morgan("dev"));
@@ -45,3 +46,7 @@ app.listen(env.PORT, async () => {
   console.log("Server is running on port 3000");
   await connectDB();
 });
+
+// // Get your endpoint online
+// ngrok.connect({ addr: 3000, authtoken_from_env: true })
+// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
